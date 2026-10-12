@@ -1,4 +1,6 @@
-package chunky
+package naive
+
+import "github.com/dimbo4ka/chunky"
 
 type naiveChunker struct {
 	chunkSize   int
@@ -21,18 +23,18 @@ func (n *naiveChunker) Split(text string) []string {
 	return chunks
 }
 
-var _ Chunker = (*naiveChunker)(nil)
+var _ chunky.Chunker = (*naiveChunker)(nil)
 
-func NewNaiveChunker(optFuncs ...naiveGeneratorOptFunc) Chunker {
-	opts := newDefaultNaiveGeneratorOptions()
+func NewChunker(optFuncs ...OptFunc) chunky.Chunker {
+	opts := newDefaultOptions()
 	for _, f := range optFuncs {
 		f(opts)
 	}
 
-	return newNaiveChunkerWithOpts(opts)
+	return newWithOpts(opts)
 }
 
-func newNaiveChunkerWithOpts(opts *naiveGeneratorOptions) *naiveChunker {
+func newWithOpts(opts *Options) *naiveChunker {
 	generator := &naiveChunker{
 		chunkSize:   opts.ChunkSize,
 		overlapSize: opts.OverlapSize,

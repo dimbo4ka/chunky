@@ -1,4 +1,4 @@
-package chunky
+package naive
 
 import (
 	"testing"
@@ -32,7 +32,7 @@ func TestNaiveChunker(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			chunker := NewNaiveChunker(WithChunkSize(tt.chunkSize), WithOverlapSize(tt.overlapSize))
+			chunker := NewChunker(WithChunkSize(tt.chunkSize), WithOverlapSize(tt.overlapSize))
 			chunks := chunker.Split(tt.text)
 			require.Equal(t, tt.chunks, chunks)
 		})
