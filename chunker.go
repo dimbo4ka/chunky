@@ -1,5 +1,5 @@
 package chunky
 
 type Chunker interface {
-	Split()
+	Split(string) []string
 }
